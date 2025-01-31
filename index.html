@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- METADATA GOES HERE -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Sales and Consumption Over Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- BOOTSTRAP 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+ 
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+ 
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+    }
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .narration {
+        font-size: 1.1em;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    canvas {
+        width: 100% !important;
+        height: 500px !important;
+        margin-bottom: 30px;
+    }
+</style>
+<body>
+
+<div class="container">
+    <h1>Fashion Industry Sales & Consumption Over Time</h1>
+
+    <!-- Global Fashion Industry Sales Chart -->
+    <p class="narration">
+        The global fashion industry has evolved significantly over the last century. In the early 1900s, fashion was a luxury reserved for the wealthy, with limited mass production. However, by the mid-20th century, global demand began to rise thanks to innovations in manufacturing and the proliferation of ready-to-wear clothing. The growth truly exploded in the 1990s, driven by fast fashion and the rise of online shopping, propelling sales into the hundreds of billions. As of 2020, the fashion industry generates over $700 billion annually. This chart shows the sales trajectory from 1900 to 2020.
+    </p>
+    <h2>Global Fashion Industry Sales (1900-Present)</h2>
+    <canvas id="salesGrowthChart"></canvas>
+
+    <!-- Fast Fashion vs Luxury Fashion Sales Chart -->
+    <p class="narration">
+        In the 21st century, fast fashion has seen explosive growth, thanks to brands like H&M, Zara, and Shein that offer quick production cycles and affordable prices. Fast fashion's appeal lies in its ability to deliver trendy clothing at a fraction of the cost of luxury counterparts. While luxury fashion remains strong, with brands like Louis Vuitton and Gucci continuing to thrive, fast fashion has outpaced luxury in terms of overall market growth, with fast fashion sales projected to reach $700 billion by 2025.
+    </p>
+    <h2>Fast Fashion vs Luxury Fashion Sales (2000-Present)</h2>
+    <canvas id="fastVsLuxuryChart"></canvas>
+
+    <!-- Online Fashion Sales Chart -->
+    <p class="narration">
+        The rise of online shopping has radically transformed the fashion industry. Consumers now have access to global fashion brands and stores with a click of a button, making shopping more convenient and accessible. By 2020, nearly 40% of fashion sales were made online, and this number is projected to grow to 60% by 2025. The convenience of online shopping, combined with the growth of e-commerce platforms like Amazon and independent brand websites, is reshaping how people buy clothing.
+    </p>
+    <h2>Online Fashion Sales (2000-2025)</h2>
+    <canvas id="onlineSalesChart"></canvas>
+
+    <!-- Fashion Sustainability Preferences Chart -->
+    <p class="narration">
+        With increasing concerns about the environmental impact of the fashion industry, consumers are becoming more mindful of sustainability. From 2015 to 2025, the demand for eco-friendly and sustainable clothing has grown significantly. This is reflected in the growing number of consumers who are willing to pay a premium for products made from sustainable materials. Fashion brands are responding by incorporating eco-friendly materials, reducing waste, and prioritizing ethical manufacturing processes to meet this demand. The sustainability trend is set to become a major force in shaping the future of fashion.
+    </p>
+    <h2>Fashion Sustainability Preferences (2015-2025)</h2>
+    <canvas id="sustainabilityChart"></canvas>
+
+    <!-- New: Where People Like to Shop (Preferences) -->
+    <p class="narration">
+        Shopping preferences have shifted over the years. Consumers are now more inclined to shop online than in physical stores. However, despite the digital transformation, a significant percentage of people still prefer the in-store experience, particularly for luxury and premium brands. This chart shows how people currently prefer to shop, with a strong inclination towards e-commerce, especially for budget-friendly and fast fashion purchases.
+    </p>
+    <h2>Where People Like to Shop (Preferences)</h2>
+    <canvas id="shoppingPreferencesChart"></canvas>
+
+    <!-- New: Revenue Distribution by Fashion Brands -->
+    <p class="narration">
+        The fashion industry is dominated by a handful of global brands that collectively make up a significant portion of the total market revenue. The largest fashion companies, such as Louis Vuitton, Zara, H&M, and Nike, each play a major role in the fashion landscape. This pie chart shows the revenue distribution among major fashion brands based on their market share.
+    </p>
+    <h2>Revenue Distribution by Fashion Brands</h2>
+    <canvas id="brandRevenueChart"></canvas>
+
+</div>
+
+<script>
+    // Global Fashion Industry Sales Growth Chart
+    var salesGrowthChart = new Chart(document.getElementById('salesGrowthChart'), {
+        type: 'line',
+        data: {
+            labels: ['1900', '1950', '1970', '1990', '2000', '2020'],
+            datasets: [{
+                label: 'Global Fashion Sales (Billions USD)',
+                data: [2, 5, 15, 100, 250, 700],
+                borderColor: '#3e95cd',
+                fill: false,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { title: { display: true, text: 'Year' } },
+                y: { title: { display: true, text: 'Sales in Billion USD' } }
+            }
+        }
+    });
+
+    // Fast Fashion vs Luxury Fashion Sales Chart
+    var fastVsLuxuryChart = new Chart(document.getElementById('fastVsLuxuryChart'), {
+        type: 'bar',
+        data: {
+            labels: ['2000', '2010', '2020', '2025'],
+            datasets: [
+                {
+                    label: 'Fast Fashion Sales (Billions USD)',
+                    data: [30, 120, 500, 700],
+                    backgroundColor: '#ff6f61'
+                },
+                {
+                    label: 'Luxury Fashion Sales (Billions USD)',
+                    data: [50, 75, 120, 150],
+                    backgroundColor: '#33b5e5'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { title: { display: true, text: 'Year' } },
+                y: { title: { display: true, text: 'Sales in Billion USD' } }
+            }
+        }
+    });
+
+    
